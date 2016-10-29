@@ -1,5 +1,4 @@
 from flask import Flask
-from flask.ext.sqlalchemy import SQLAlchemy
 from .app_config import DB_USER, DB_PW, DB_HOST, DB_NAME
 
 

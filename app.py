@@ -1,7 +1,9 @@
-from flask import Flask, request
-from flask.ext.sqlalchemy import SQLAlchemy
+from flask import request
+from flask_sqlalchemy import SQLAlchemy
 import twilio.twiml
 from story_collector import create_app
+from story_collector.models import Story
+from story_collector.database import db
 
 
 app = create_app()
@@ -28,7 +30,9 @@ def handle_recording():
 
     print("recording url: %s" %recording_url)
 
-    # TODO: store recording
+    new_story = Story(recording_url)
+    db.session.add(new_story)
+    db.session.commit()
 
     # TODO: handle re-recording
     # TODO: collect demographic info

@@ -1,7 +1,5 @@
-from flask.ext.sqlalchemy import SQLAlchemy
-from story_collector import create_app
-from story_collector.models import Story
 from story_collector.database import db
+from story_collector.models import Story
 
 
 def init_db():
