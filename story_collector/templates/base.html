@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="">
+    <meta name="author" content="">
+
+    <title>[TITLE HERE]</title>
+
+    <!-- favicon -->
+    <link rel="shortcut icon" type="image/png" href="{{ url_for('static', filename='images/favicon.png') }}">
+
+    <!-- Bootstrap core CSS -->
+    <link href="{{ url_for('static', filename='bootstrap.min.css') }}" rel="stylesheet">
+    <link href="//maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css" rel="stylesheet">
+
+    <!-- Custom styles for this template -->
+    {% block extra_styles %}{% endblock %}
+    <link href="{{ url_for('static', filename='custom.css') }}" rel="stylesheet">
+
+    <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!--[if lt IE 9]>
+      <script src="static/js/html5shiv.js"></script>
+      <script src="static/js/respond.min.js"></script>
+    <![endif]-->
+  </head>
+
+  <body>
+      <div>
+          {% with messages = get_flashed_messages(with_categories=true) %}
+              {% if messages %}
+                  <div class="row">
+                    <div class="col-sm-12">
+                      {% for category, message in messages %}
+                        {% if category == 'message' %}
+                          <div class="alert alert-success alert-dismissible task-finish-alert" role="alert">
+                          <button type="button" class="close" data-dismiss="alert">
+                          <span aria-hidden="true">&times;</span>
+                          <span class="sr-only">Close</span>
+                          </button>
+                          {{ message|safe }}
+                          </div>
+                        {% endif %}
+                      {% endfor %}
+                    </div>
+                  </div>
+              {% endif %}
+          {% endwith %}
+      <div>
+
+      <div class="container-fluid">
+        {% block content %}{% endblock %}
+
+      </div>
+
+
+    <!-- Bootstrap core JavaScript
+    ================================================== -->
+    <!-- Placed at the end of the document so the pages load faster -->
+    <script src="{{ url_for('static', filename='jquery-3.1.1.min.js') }}"></script>
+    <script src="{{ url_for('static', filename='bootstrap.min.js') }}"></script>
+
+    {% block extra_javascript %}{% endblock %}
+
+  </body>
+</html>

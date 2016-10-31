@@ -1,4 +1,4 @@
-from flask import request
+from flask import request, render_template
 from flask_sqlalchemy import SQLAlchemy
 import twilio.twiml
 from story_collector import create_app
@@ -8,7 +8,13 @@ from story_collector.database import db
 
 app = create_app()
 
-@app.route("/", methods=['GET', 'POST'])
+@app.route("/")
+def index():
+    # TODO: grab some recordings to show
+    return render_template('index.html')
+
+
+@app.route("/greet", methods=['GET', 'POST'])
 def greet():
     """Respond to incoming requests."""
     print("greet")
