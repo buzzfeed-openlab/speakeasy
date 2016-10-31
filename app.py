@@ -19,8 +19,8 @@ def greet():
     """Respond to incoming requests."""
     print("greet")
     resp = twilio.twiml.Response()
-    resp.say("Hi stranger. Tell me your election 2016 secrets. You have 5 seconds after the tone.")
-    resp.record(maxLength="5", action="/handle-recording")
+    resp.say("Hi stranger. Tell me your election 2016 secrets. You have 30 seconds after the tone.")
+    resp.record(maxLength="30", action="/handle-recording")
 
     return str(resp)
 
@@ -28,7 +28,9 @@ def greet():
 def handle_recording():
     """Play back the caller's recording."""
 
-    recording_url = request.values.get("RecordingUrl", None)
+    recording_url = request.values.get('RecordingUrl', None)
+    call_sid = request.values.get('CallSid', None)
+    from_number = request.values.get('From', None)
 
     resp = twilio.twiml.Response()
     resp.say("Thanks! Here is your recording:")
@@ -36,7 +38,7 @@ def handle_recording():
 
     print("recording url: %s" %recording_url)
 
-    new_story = Story(recording_url)
+    new_story = Story(call_sid, from_number, recording_url)
     db.session.add(new_story)
     db.session.commit()
 
