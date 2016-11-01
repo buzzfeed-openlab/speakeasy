@@ -1,9 +1,11 @@
-from flask import request, render_template
+from flask import request, render_template, Response
 from flask_sqlalchemy import SQLAlchemy
-import twilio.twiml
+from functools import wraps
 from story_collector import create_app
+from story_collector.app_config import ADMIN_USER, ADMIN_PASS
 from story_collector.models import Story
 from story_collector.database import db
+import twilio.twiml
 
 
 app = create_app()
@@ -66,6 +68,35 @@ def handle_recording():
 #     # # If the caller pressed anything but 1, redirect them to the homepage.
 #     # else:
 #     #     return redirect("/")
+
+
+def check_auth(username, password):
+    """This function is called to check if a username /
+    password combination is valid.
+    """
+    return username == ADMIN_USER and password == ADMIN_PASS
+
+def authenticate():
+    """Sends a 401 response that enables basic auth"""
+    return Response(
+    'Could not verify your credentials for that url', 401,
+    {'WWW-Authenticate': 'Basic realm="Login Required"'})
+
+def requires_auth(f):
+    @wraps(f)
+    def decorated(*args, **kwargs):
+        auth = request.authorization
+        if not auth or not check_auth(auth.username, auth.password):
+            return authenticate()
+        return f(*args, **kwargs)
+    return decorated
+
+
+@app.route('/review')
+@requires_auth
+def secret_page():
+    return render_template('review.html')
+
 
 
 if __name__ == "__main__":
