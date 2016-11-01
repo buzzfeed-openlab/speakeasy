@@ -19,4 +19,4 @@ class Story(db.Model):
 
 
     def __repr__(self):
-        return '<Story %r>' % self.url
+        return '<Story %r>' % self.recording_url

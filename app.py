@@ -1,4 +1,4 @@
-from flask import request, render_template, Response
+from flask import redirect, request, render_template, Response
 from flask_sqlalchemy import SQLAlchemy
 from functools import wraps
 from story_collector import create_app
@@ -14,6 +14,11 @@ app = create_app()
 def index():
     # TODO: grab some recordings to show
     return render_template('index.html')
+
+@app.route('/browse')
+def browse():
+    approved = Story.query.filter_by(is_approved=True).all()
+    return render_template('browse.html', approved=approved)
 
 
 @app.route("/greet", methods=['GET', 'POST'])
@@ -94,8 +99,24 @@ def requires_auth(f):
 
 @app.route('/review')
 @requires_auth
-def secret_page():
-    return render_template('review.html')
+def review():
+    review_queue = Story.query.filter_by(is_approved=False).all()
+    approved = Story.query.filter_by(is_approved=True).all()
+    return render_template('review.html', review_queue = review_queue, approved=approved)
+
+@app.route('/approve/<story_id>')
+@requires_auth
+def approve(story_id):
+    story = Story.query.get(story_id)
+    story.is_approved = True
+    return redirect('/review')
+
+@app.route('/disapprove/<story_id>')
+@requires_auth
+def disapprove(story_id):
+    story = Story.query.get(story_id)
+    story.is_approved = False
+    return redirect('/review')
 
 
 

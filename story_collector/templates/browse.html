@@ -1,0 +1,17 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="container">
+  <div class="row">
+    <div class="col-sm-8 col-sm-offset-2">
+      <h1>Browse stories</h1>
+      {% for story in approved %}
+        <audio controls>
+          <source src="{{ story.recording_url }}" type="audio/wav">
+          Your browser does not support the audio element.
+        </audio> 
+      {% endfor %}
+    </div>
+  </div>
+</div>
+{% endblock %}
