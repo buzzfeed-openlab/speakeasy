@@ -5,21 +5,54 @@
   <div class="row">
     <div class="col-sm-8 col-sm-offset-2">
       <h1>Recordings to review</h1>
-      {% for story in review_queue %}
-        <audio controls>
-          <source src="{{ story.recording_url }}" type="audio/wav">
-          Your browser does not support the audio element.
-        </audio>
-        <a href="/approve/{{ story.id }}">Approve</a>
-      {% endfor %}
+      <table class="table table-condensed small">
+        <thead>
+          <tr><th>Recording</th><th>Date</th><th>Zip</th><th></th></tr>
+        </thead>
+        <tbody>
+          {% for story in review_queue %}
+          <tr>
+            <td>
+              <audio controls>
+                <source src="{{ story.recording_url }}" type="audio/wav">
+                Your browser does not support the audio element.
+              </audio>
+            </td>
+            <td>{{ story.dt }}</td>
+            <td>{{ story.caller_zip }}</td>
+            <td>
+              <a class="btn btn-success btn-sm" href="/approve/{{ story.id }}">Approve</a>
+            </td>
+          </tr>
+          {% endfor %}
+        </tbody>
+      </table>
+
       <h1>Approved recordings</h1>
-      {% for story in approved %}
-        <audio controls>
-          <source src="{{ story.recording_url }}" type="audio/wav">
-          Your browser does not support the audio element.
-        </audio> 
-        <a href="/disapprove/{{ story.id }}">Disapprove</a>
-      {% endfor %}
+
+      <table class="table table-condensed small">
+        <thead>
+          <tr><th>Recording</th><th>Date</th><th>Zip</th><th></th></tr>
+        </thead>
+        <tbody>
+          {% for story in approved %}
+          <tr>
+            <td>
+              <audio controls>
+                <source src="{{ story.recording_url }}" type="audio/wav">
+                Your browser does not support the audio element.
+              </audio>
+            </td>
+            <td>{{ story.dt }}</td>
+            <td>{{ story.caller_zip }}</td>
+            <td>
+              <a class="btn btn-warning btn-sm" href="/disapprove/{{ story.id }}">Disapprove</a>
+            </td>
+          </tr>
+          {% endfor %}
+        </tbody>
+      </table>
+
     </div>
   </div>
 </div>
