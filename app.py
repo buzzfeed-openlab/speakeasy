@@ -26,9 +26,11 @@ def greet():
     """Respond to incoming requests."""
     print("greet")
     resp = twilio.twiml.Response()
-    resp.say("Hi stranger. Tell me your election 2016 secrets. You have 30 seconds after the tone.")
+    resp.say("Hi stranger. You have 30 seconds after the tone.")
     resp.record(maxLength="30", action="/handle-recording")
 
+
+    
     return str(resp)
 
 @app.route("/handle-recording", methods=['GET', 'POST'])
@@ -40,8 +42,12 @@ def handle_recording():
     from_number = request.values.get('From', None)
 
     resp = twilio.twiml.Response()
-    resp.say("Thanks! Here is your recording:")
-    resp.play(recording_url)
+
+    # resp.say("Thanks! Here is your recording:")
+    # resp.play(recording_url)
+    # # TODO: handle re-recording
+    resp.say("Thanks! Your response has been saved")
+    resp.pause(length=1)
 
     print("recording url: %s" %recording_url)
 
@@ -49,10 +55,30 @@ def handle_recording():
     db.session.add(new_story)
     db.session.commit()
 
-    # TODO: handle re-recording
-    # TODO: collect demographic info
+    resp.say("Now, you can tell us a little more about yourself if you'd like")
+    resp.pause(length=1)
 
+    # collecting zip
+    with resp.gather(numDigits=5, action="/collect-zip", method="POST") as g:
+        g.say("Enter your zipcode")
+
+    resp.pause(length=20)
     return str(resp)
+
+
+@app.route("/collect-zip", methods=['GET', 'POST'])
+def collect_zip():
+
+    pressed = request.values.get('Digits', None)
+
+    story = Story.query.filter_by(call_sid=request.values.get('CallSid', None)).first()
+    story.caller_zip = pressed
+    db.session.commit()
+
+    resp = twilio.twiml.Response()
+    resp.say("Thanks! You can browse all the stories at placeholder URL dot com")
+    return str(resp)
+
 
 
 # @app.route("/handle-key", methods=['GET', 'POST'])

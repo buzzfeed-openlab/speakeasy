@@ -11,6 +11,7 @@ class Story(db.Model):
     recording_url = db.Column(db.String(255), unique=True)
     is_approved = db.Column(db.Boolean, default=False)
     dt = db.Column(db.DateTime, default=datetime.datetime.now)
+    caller_zip = db.Column(db.String(255))
 
     def __init__(self, call_sid, from_number, recording_url):
         self.call_sid = call_sid
