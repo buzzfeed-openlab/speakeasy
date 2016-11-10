@@ -5,3 +5,5 @@ DB_NAME = 'un-decided'
 
 ADMIN_USER = 'admin'
 ADMIN_PASS = 'something-secret'
+
+USE_FAKE_DATA = False # set this to True to use dummy data instead of db

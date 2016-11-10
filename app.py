@@ -2,9 +2,10 @@ from flask import redirect, request, render_template, Response
 from flask_sqlalchemy import SQLAlchemy
 from functools import wraps
 from story_collector import create_app
-from story_collector.app_config import ADMIN_USER, ADMIN_PASS
+from story_collector.app_config import ADMIN_USER, ADMIN_PASS, USE_FAKE_DATA
 from story_collector.models import Story
 from story_collector.database import db
+from story_collector.fake_data import FAKE_STORIES
 import twilio.twiml
 
 
@@ -17,7 +18,12 @@ def index():
 
 @app.route('/browse')
 def browse():
-    approved = Story.query.filter_by(is_approved=True).all()
+
+    if USE_FAKE_DATA:
+        approved = FAKE_STORIES
+    else:
+        approved = Story.query.filter_by(is_approved=True).all()
+
     return render_template('browse.html', approved=approved)
 
 
@@ -126,8 +132,12 @@ def requires_auth(f):
 @app.route('/review')
 @requires_auth
 def review():
-    review_queue = Story.query.filter_by(is_approved=False).all()
-    approved = Story.query.filter_by(is_approved=True).all()
+    if USE_FAKE_DATA:
+        review_queue = FAKE_STORIES
+        approved = FAKE_STORIES
+    else:
+        review_queue = Story.query.filter_by(is_approved=False).all()
+        approved = Story.query.filter_by(is_approved=True).all()
     return render_template('review.html', review_queue = review_queue, approved=approved)
 
 @app.route('/approve/<story_id>')
