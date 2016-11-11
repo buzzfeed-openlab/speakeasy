@@ -6,7 +6,7 @@
         song.controls = false;
 
         var player_box = document.createElement('div');
-        $(player_box).addClass($(song).attr('class') + ' well container-fluid playa');
+        $(player_box).addClass($(song).attr('class') + '  container-fluid playa');
 
         var data_sec = document.createElement('section');
         $(data_sec).addClass('collapsing center-block row col-sm-12');

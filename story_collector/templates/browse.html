@@ -1,17 +1,32 @@
 {% extends 'base.html' %}
 
 {% block content %}
+
 <div class="container">
   <div class="row">
-    <div class="col-sm-8 col-sm-offset-2">
-      <h1>Browse stories</h1>
-      {% for story in approved %}
-        <audio controls>
-          <source src="{{ story.recording_url }}" type="audio/wav">
-          Your browser does not support the audio element.
-        </audio> 
-      {% endfor %}
+    <div class="col-sm-8 col-sm-offset-2 rounded-box speechbubble">
+        <h1>What Would <span class="buzzfeed-red">Trump</span> do?</h1>
     </div>
   </div>
+
+</div>
+
+<div class="container" id="stories">
+  <div class="row">
+      
+      {% for story in approved %}
+        <div class="col-sm-6">
+          <div class="rounded-story-box"> 
+            <p>Caller <span class="buzzfeed-red">17</span> from <span class="buzzfeed-red">Texas</span> submitted this story on <span  class="buzzfeed-red">Nov. 10, 2017</span>:</p>
+            <audio controls>
+             <source src="{{ story.recording_url }}" type="audio/wav">
+             Your browser does not support the audio element.
+            </audio>
+          </div>
+        </div>
+      {% endfor %}
+
+  </div>
+
 </div>
 {% endblock %}

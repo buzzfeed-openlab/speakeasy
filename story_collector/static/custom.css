@@ -32,15 +32,16 @@ body {
 
 .buzzfeed-red{
 	color:#e93f33;
+  font-weight: bold;
 }
 
-#intro h1{
+.speechbubble h1{
 	font-family: 'Roboto', sans-serif;
 	text-transform: uppercase;
 	font-weight: bold;
 	margin-top: 10px;
 	text-align: center;
-	font-size: 2.8em;
+	font-size: 2em;
 	
 }
 
@@ -143,3 +144,30 @@ To Glyphicons (http://glyphicons.com/) for the Halflings glyphs font */
   }
 }
 
+
+/*user stories*/
+
+#stories{
+  margin-top: 50px
+}
+
+
+.well{
+  background-color: #fff;
+}
+
+.rounded-story-box{
+  color: #1a1918;
+  background-color: #fff;
+  margin: 15px 0px 0px 0px;
+  border-radius: 10px;
+  padding: 15px 15px;
+  text-align: center;
+  -webkit-box-shadow: 10px 15px 0px 0px rgba(166,36,36,1);
+  -moz-box-shadow: 10 15px 0px 0px rgba(166,36,36,1);
+  box-shadow: 10 15px 0px 0px rgba(166,36,36,1);
+}
+
+@media (max-width:845px){
+
+}
