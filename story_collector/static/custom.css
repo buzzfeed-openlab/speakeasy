@@ -153,6 +153,11 @@ To Glyphicons (http://glyphicons.com/) for the Halflings glyphs font */
   margin-top: 50px
 }
 
+.timestamp{
+  font-size: 0.75em;
+  line-height: 1.2em;
+  color: #565656;
+}
 
 .well{
   background-color: #fff;
@@ -164,10 +169,35 @@ To Glyphicons (http://glyphicons.com/) for the Halflings glyphs font */
   margin: 15px 0px 0px 0px;
   border-radius: 10px;
   padding: 15px 15px;
-  text-align: center;
+  text-align: left;
   -webkit-box-shadow: 10px 15px 0px 0px rgba(166,36,36,1);
   -moz-box-shadow: 10 15px 0px 0px rgba(166,36,36,1);
   box-shadow: 10 15px 0px 0px rgba(166,36,36,1);
+}
+
+.container-fluid.playa {
+    padding: 0px;
+}
+
+.btn-group.center-block {
+    padding: 0px;
+}
+
+.playbutton-container,
+.volume-up-container{
+    padding-right: 20px;
+    padding-left: 7px;
+}
+
+.btn-default {
+    color: #ffffff;
+    background-color: #e93f33;
+    border-color: #e93f33;
+}
+
+.btn-default:hover{
+  background-color:rgb(236, 109, 100);
+  border-color: rgb(236, 109, 100);
 }
 
 @media (max-width:845px){
@@ -176,5 +206,8 @@ To Glyphicons (http://glyphicons.com/) for the Halflings glyphs font */
     border-bottom-left-radius: 0;
     border-top-left-radius: 0;
 
+  }
+  .playa .col-sm-12 {
+       width: auto; 
   }
 }

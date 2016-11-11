@@ -41,7 +41,7 @@
 
         var addPlay = function () {
             var play = document.createElement('button');
-            $(play).addClass('btn  btn-default disabled col-sm-1');
+            $(play).addClass('btn  btn-default disabled col-sm-1 playbutton-container');
 
             play.setPlayState = function (toggle) {
                 $(play).removeClass('disabled');
