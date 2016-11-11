@@ -195,7 +195,8 @@ To Glyphicons (http://glyphicons.com/) for the Halflings glyphs font */
     border-color: #e93f33;
 }
 
-.btn-default:hover{
+.btn-default:hover,
+.btn-default:focus{
   background-color:rgb(236, 109, 100);
   border-color: rgb(236, 109, 100);
 }
