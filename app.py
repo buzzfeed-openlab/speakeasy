@@ -32,7 +32,7 @@ def greet():
     """Respond to incoming requests."""
     print("greet")
     resp = twilio.twiml.Response()
-    resp.say("Hi stranger. You have 30 seconds after the tone.")
+    resp.play('http://lamivo.com/wwtd/greet.mp3')
     resp.record(maxLength="30", action="/handle-recording")
 
 
@@ -52,8 +52,6 @@ def handle_recording():
     # resp.say("Thanks! Here is your recording:")
     # resp.play(recording_url)
     # # TODO: handle re-recording
-    resp.say("Thanks! Your response has been saved")
-    resp.pause(length=1)
 
     print("recording url: %s" %recording_url)
 
@@ -61,12 +59,9 @@ def handle_recording():
     db.session.add(new_story)
     db.session.commit()
 
-    resp.say("Now, you can tell us a little more about yourself if you'd like")
-    resp.pause(length=1)
-
     # collecting zip
-    with resp.gather(numDigits=5, action="/collect-zip", method="POST") as g:
-        g.say("Enter your zipcode")
+    resp.play('http://lamivo.com/wwtd/collect_zip.mp3')
+    resp.gather(numDigits=5, action="/collect-zip", method="POST")
 
     resp.pause(length=20)
     return str(resp)
@@ -82,29 +77,8 @@ def collect_zip():
     db.session.commit()
 
     resp = twilio.twiml.Response()
-    resp.say("Thanks! You can browse all the stories at placeholder URL dot com")
+    resp.play('http://lamivo.com/wwtd/outro.mp3')
     return str(resp)
-
-
-
-# @app.route("/handle-key", methods=['GET', 'POST'])
-# def handle_key():
-#     """Handle key press from a user."""
-
-#     # Get the digit pressed by the user
-#     digit_pressed = request.values.get('Digits', None)
-#     if digit_pressed == "1":
-#         resp = twilio.twiml.Response()
-#         resp.say("you pressed 1")
-#         return str(resp)
-#     else:
-#     	resp.say("you pressed something else")
-#     	return str(resp)
-
-
-#     # # If the caller pressed anything but 1, redirect them to the homepage.
-#     # else:
-#     #     return redirect("/")
 
 
 def check_auth(username, password):
