@@ -98,13 +98,15 @@ i.fa.fa-phone.animated {
 .playa .btn-group .btn {
     display:inline-block;
     float:none;
-    height: 2.2em;
+    height: 2.5em;
 }
 
 /*  contains the attribution link */
 .playa .row:nth-child(4) { 
   overflow: hidden;
 }
+
+
 
 /* Acknowledgements:
 To Glyphicons (http://glyphicons.com/) for the Halflings glyphs font */
@@ -169,5 +171,10 @@ To Glyphicons (http://glyphicons.com/) for the Halflings glyphs font */
 }
 
 @media (max-width:845px){
+  .volume-up-container{
+    border-radius: 3px
+    border-bottom-left-radius: 0;
+    border-top-left-radius: 0;
 
+  }
 }

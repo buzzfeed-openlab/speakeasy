@@ -244,7 +244,7 @@
 
         var addMute = function () {
             var mute = document.createElement('button');
-            $(mute).addClass('btn btn-default  col-sm-1');
+            $(mute).addClass('btn btn-default  col-sm-1 volume-up-container');
 
             mute.checkVolume = function () {
                 if (song.volume > 0.5 && !song.muted) {
