@@ -9,14 +9,14 @@
         $(player_box).addClass($(song).attr('class') + '  container-fluid playa');
 
         var data_sec = document.createElement('section');
-        $(data_sec).addClass('collapsing center-block row col-sm-12');
+        $(data_sec).addClass('collapsing center-block row col-xs-12');
 
         var toggle_holder = document.createElement('div');
-        $(toggle_holder).addClass('btn-group center-block row col-sm-12');
+        $(toggle_holder).addClass('btn-group center-block row col-xs-12');
 
         var data_toggle = document.createElement('button');
         $(data_toggle).html('<i class="glyphicon glyphicon-align-justify" style="top:-3px"></i>');
-        $(data_toggle).addClass('btn btn-default btn-lg btn-block row col-sm-12');
+        $(data_toggle).addClass('btn btn-default btn-lg btn-block row col-xs-12');
         $(data_toggle).attr('style', 'opacity:0.3');
         $(data_toggle).click(function () {$(data_sec).collapse('toggle'); });
         $(data_toggle).attr('title', 'Details');
@@ -27,7 +27,7 @@
         $(data_table).addClass('table table-condensed');
 
         var player = document.createElement('section');
-        $(player).addClass('btn-group  center-block row  col-sm-12');
+        $(player).addClass('btn-group  center-block row  col-xs-12');
 
         var load_error = function () {
             // console.log('error');
@@ -41,7 +41,7 @@
 
         var addPlay = function () {
             var play = document.createElement('button');
-            $(play).addClass('btn  btn-default disabled col-sm-1 playbutton-container');
+            $(play).addClass('btn  btn-default disabled col-xs-3 playbutton-container');
 
             play.setPlayState = function (toggle) {
                 $(play).removeClass('disabled');
@@ -162,7 +162,7 @@
             };
 
             var seek_wrapper = document.createElement('div');
-            $(seek_wrapper).addClass('btn btn-default col-sm-4 hidden-xs');
+            $(seek_wrapper).addClass('btn btn-default col-xs-6');
             $(seek_wrapper).append(seek);
 
             // bind seek / position slider events
@@ -185,7 +185,7 @@
 
         var addTime = function () {
             var time = document.createElement('button');
-            $(time).addClass('btn btn-default col-sm-3');
+            $(time).addClass('btn btn-default col-xs-3');
             $(time).tooltip({'container': 'body', 'placement': 'right', 'html': true});
 
             time.twodigit = function (myNum) {
@@ -211,10 +211,10 @@
                 var length_title = 'Click to Reset<hr style="padding:0; margin:0;" />Length: ';
                 if (!song.paused) {
                     $(time).html(time.timesplit(song.currentTime));
-                    $(time).attr({'title': length_title + (time.timesplit(song.duration))});
+                    // $(time).attr({'title': length_title + (time.timesplit(song.duration))});
                 } else {
                     $(time).html(time.timesplit(song.duration));
-                    $(time).attr({'title': position_title  + (time.timesplit(song.currentTime))});
+                    // $(time).attr({'title': position_title  + (time.timesplit(song.currentTime))});
                 }
                 $(time).tooltip('fixTitle');
             }; // time.showtime
@@ -244,7 +244,7 @@
 
         var addMute = function () {
             var mute = document.createElement('button');
-            $(mute).addClass('btn btn-default  col-sm-1 volume-up-container');
+            $(mute).addClass('btn btn-default  col-xs-1 volume-up-container');
 
             mute.checkVolume = function () {
                 if (song.volume > 0.5 && !song.muted) {
@@ -293,7 +293,7 @@
             };
 
             var vol_wrapper = document.createElement('div');
-            $(vol_wrapper).addClass('btn  btn-default  row col-sm-3  hidden-xs');
+            $(vol_wrapper).addClass('btn  btn-default  row col-xs-3  hidden-xs');
             $(vol_wrapper).append(volume);
             $(volume).on('change', volume.slide);
             $(song).on('volumechange', volume.set);
@@ -358,18 +358,18 @@
             if ($(song).data('time') !== 'off') {
                 addTime();
             }
-            if ($(song).data('mute') !== 'off') {
-                addMute();
-            }
-            if ($(song).data('volume') !== 'off') {
-                addVolume();
-            }
+            // if ($(song).data('mute') !== 'off') {
+            //     addMute();
+            // }
+            // if ($(song).data('volume') !== 'off') {
+            //     addVolume();
+            // }
             $(player_box).append(player);
         }; // addPlayer
 
         var addAttribution = function () {
             var attribution = document.createElement('div');
-            $(attribution).addClass('row col-sm-10 col-sm-offset-1');
+            $(attribution).addClass('row col-xs-10 col-xs-offset-1');
             if (typeof ($(song).data('infoAttLink')) !== 'undefined') {
                 var attribution_link = document.createElement('a');
                 $(attribution_link).addClass('text-muted btn btn-link btn-sm');

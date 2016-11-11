@@ -176,29 +176,28 @@ To Glyphicons (http://glyphicons.com/) for the Halflings glyphs font */
 }
 
 .container-fluid.playa {
-    padding: 0px;
+    padding: 0px 0px 15px 0px;
 }
 
 .btn-group.center-block {
     padding: 0px;
 }
 
-.playbutton-container,
-.volume-up-container{
-    padding-right: 20px;
-    padding-left: 7px;
-}
 
 .btn-default {
-    color: #ffffff;
-    background-color: #e93f33;
+    color: #e93f33;
+    background-color: #fff;
     border-color: #e93f33;
 }
 
 .btn-default:hover,
 .btn-default:focus{
-  background-color:rgb(236, 109, 100);
-  border-color: rgb(236, 109, 100);
+  background-color:#ccc;
+  border-color: #e93f33;
+}
+
+button.btn.btn-default.col-xs-3 {
+    font-family: 'Ubuntu', helvetica, sans serif;
 }
 
 @media (max-width:845px){
