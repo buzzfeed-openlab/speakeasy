@@ -4,7 +4,7 @@ experimenting with collecting audio snippets from phone calls - starting with pe
 ## Setup
 1. **Install OS level dependencies**
   - Python 3
-  - Postgres
+  - MySQL
 2. **Clone this repo & install app requirements**
 
   ```bash
@@ -12,16 +12,23 @@ experimenting with collecting audio snippets from phone calls - starting with pe
   cd un-decided
   pip install -r requirements.txt
   ```
-3. **Create a PostgreSQL database**
+3. **Create a MySQL database**
 
   ```bash
-  createdb un-decided
+  mysql -u root -p
   ```
+  & then
+  ```
+  create database story_collector
+  ```
+
 4. **Create your own `app_config.py` file**
 
   ```bash
   cp story_collector/app_config.py.example story_collector/app_config.py
   ```
+  change the settings (e.g. db info) in `app_config.py` as appropriate
+
 5. **Initialize the database**
   
   ```bash

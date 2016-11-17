@@ -9,7 +9,7 @@ class Story(db.Model):
     call_sid = db.Column(db.String(255), unique=True)
     from_number = db.Column(db.String(255))
     recording_url = db.Column(db.String(255), unique=True)
-    is_approved = db.Column(db.Boolean, default=False)
+    is_approved = db.Column(db.Boolean)
     dt = db.Column(db.DateTime, default=datetime.datetime.now)
     caller_zip = db.Column(db.String(255))
 
