@@ -7,7 +7,7 @@
       <h1>Recordings to review</h1>
       <table class="table table-condensed small">
         <thead>
-          <tr><th>Recording</th><th>Date</th><th>Zip</th><th></th></tr>
+          <tr><th>Recording</th><th>Date</th><th>Zip</th><th></th><th></th></tr>
         </thead>
         <tbody>
           {% for story in review_queue %}
@@ -21,14 +21,25 @@
             <td>{{ story.dt }}</td>
             <td>{{ story.caller_zip }}</td>
             <td>
-              <a class="btn btn-success btn-sm" href="/approve/{{ story.id }}">Approve</a>
+              <a class="btn btn-success btn-sm" href="/approve/{{ story.id }}" title="Approve">
+                <i class="fa fa-check" aria-hidden="true"></i>
+              </a>
+            </td>
+            <td>
+              <a class="btn btn-warning btn-sm" href="/disapprove/{{ story.id }}" title="Disapprove">
+                <i class="fa fa-times" aria-hidden="true"></i>
+              </a>
             </td>
           </tr>
           {% endfor %}
         </tbody>
       </table>
 
-      <h1>Approved recordings</h1>
+      <br/>
+
+      <h2>
+        <i class="fa fa-check" aria-hidden="true"></i>Approved
+      </h2>
 
       <table class="table table-condensed small">
         <thead>
@@ -46,7 +57,41 @@
             <td>{{ story.dt }}</td>
             <td>{{ story.caller_zip }}</td>
             <td>
-              <a class="btn btn-warning btn-sm" href="/disapprove/{{ story.id }}">Disapprove</a>
+              <a class="btn btn-warning btn-sm" href="/disapprove/{{ story.id }}" title="Disapprove">
+                <i class="fa fa-times" aria-hidden="true"></i>
+              </a>
+            </td>
+          </tr>
+          {% endfor %}
+        </tbody>
+      </table>
+
+      <br/>
+
+
+      <h2>
+        <i class="fa fa-times" aria-hidden="true"></i>Disapproved
+      </h2>
+
+      <table class="table table-condensed small">
+        <thead>
+          <tr><th>Recording</th><th>Date</th><th>Zip</th><th></th></tr>
+        </thead>
+        <tbody>
+          {% for story in disapproved %}
+          <tr>
+            <td>
+              <audio controls>
+                <source src="{{ story.recording_url }}" type="audio/wav">
+                Your browser does not support the audio element.
+              </audio>
+            </td>
+            <td>{{ story.dt }}</td>
+            <td>{{ story.caller_zip }}</td>
+            <td>
+              <a class="btn btn-success btn-sm" href="/approve/{{ story.id }}" title="Approve">
+                <i class="fa fa-check" aria-hidden="true"></i>
+              </a>
             </td>
           </tr>
           {% endfor %}

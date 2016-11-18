@@ -109,16 +109,20 @@ def review():
     if USE_FAKE_DATA:
         review_queue = FAKE_STORIES
         approved = FAKE_STORIES
+        disapproved = FAKE_STORIES
     else:
-        review_queue = Story.query.filter_by(is_approved=False).all()
+        review_queue = Story.query.filter_by(is_approved=None).all()
         approved = Story.query.filter_by(is_approved=True).all()
-    return render_template('review.html', review_queue = review_queue, approved=approved)
+        disapproved = Story.query.filter_by(is_approved=False).all()
+
+    return render_template('review.html', review_queue = review_queue, approved=approved, disapproved=disapproved)
 
 @app.route('/approve/<story_id>')
 @requires_auth
 def approve(story_id):
     story = Story.query.get(story_id)
     story.is_approved = True
+    db.session.commit()
     return redirect('/review')
 
 @app.route('/disapprove/<story_id>')
@@ -126,6 +130,7 @@ def approve(story_id):
 def disapprove(story_id):
     story = Story.query.get(story_id)
     story.is_approved = False
+    db.session.commit()
     return redirect('/review')
 
 
