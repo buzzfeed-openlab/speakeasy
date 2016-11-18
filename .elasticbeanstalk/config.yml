@@ -1,0 +1,11 @@
+branch-defaults:
+  docker:
+    environment: wwtd-prod
+    group_suffix: null
+global:
+  application_name: wwtd
+  default_ec2_keyname: wwtd
+  default_platform: Docker 1.11.2
+  default_region: us-east-1
+  profile: bf-openlab
+  sc: git
