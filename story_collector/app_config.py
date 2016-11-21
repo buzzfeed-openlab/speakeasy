@@ -6,4 +6,4 @@ DB_NAME = 'story_collector'
 ADMIN_USER = 'admin'
 ADMIN_PASS = 'something-secret'
 
-USE_FAKE_DATA = False # set this to True to use dummy data instead of db
+USE_FAKE_DATA = True # set this to True to use dummy data instead of db
