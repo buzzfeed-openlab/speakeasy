@@ -1,7 +1,7 @@
 # un-decided
 experimenting with collecting audio snippets from phone calls - starting with people who feel conflicted about election 2016
 
-## Setup
+## Running this app locally
 1. **Install OS level dependencies**
   - Python 3
   - MySQL
@@ -22,18 +22,16 @@ experimenting with collecting audio snippets from phone calls - starting with pe
   create database story_collector
   ```
 
-4. **Create your own `app_config.py` file**
+4. **Set environment variables if appropriate**
 
-  ```bash
-  cp story_collector/app_config.py.example story_collector/app_config.py
-  ```
-  change the settings (e.g. db info) in `app_config.py` as appropriate
+  see `story_collector/app_config.py`
 
 5. **Initialize the database**
   
   ```bash
   python init_db.py
   ```
+
 6. **Run the app**
   
   ```bash
