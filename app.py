@@ -1,5 +1,6 @@
 from flask import redirect, request, render_template, Response
 from flask_sqlalchemy import SQLAlchemy
+from sqlalchemy.sql.expression import func
 from functools import wraps
 from story_collector import create_app
 from story_collector.app_config import ADMIN_USER, ADMIN_PASS, USE_FAKE_DATA
@@ -59,11 +60,21 @@ def handle_recording():
     db.session.add(new_story)
     db.session.commit()
 
-    # collecting zip
-    resp.play('http://lamivo.com/wwtd/collect_zip.mp3')
-    resp.gather(numDigits=5, action="/collect-zip", method="POST")
+    # # collecting zip
+    # resp.play('http://lamivo.com/wwtd/collect_zip.mp3')
+    # resp.gather(numDigits=5, action="/collect-zip", method="POST")
+    # resp.pause(length=20)
 
-    resp.pause(length=20)
+
+    # get a random story that has been approved and play it
+    print("grabbing a random story")
+    random_story = Story.query.filter_by(is_approved=True).order_by(func.rand()).first()
+
+    if random_story:
+        resp.say("Listen to what someone else has to say:")
+        resp.pause(length=1)
+        resp.play(random_story.recording_url)
+
     return str(resp)
 
 
