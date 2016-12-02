@@ -60,6 +60,7 @@ i.fa.fa-phone.animated {
 
 #introtext{
 	padding:35px 25px;
+  text-align: left;
 }
 
 @media (max-width: 600px){
