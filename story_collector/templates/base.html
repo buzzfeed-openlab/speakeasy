@@ -11,12 +11,22 @@
     <!-- favicon -->
     <link rel="shortcut icon" type="image/png" href="{{ url_for('static', filename='images/favicon.png') }}">
 
+    <!-- background image -->
+    <style>
+      body{
+        background-image: url( {{ url_for('static', filename='background.png') }});
+          background-size: cover;
+      }
+
+    </style>
+
     <!-- Bootstrap core CSS -->
     <link href="{{ url_for('static', filename='bootstrap.min.css') }}" rel="stylesheet">
     <link href="http://maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css" rel="stylesheet">
 
     <!-- google fonts -->
     <link href="https://fonts.googleapis.com/css?family=Roboto:700" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Montserrat:400,700" rel="stylesheet">
 
     <!-- animate library -->
     <link href="{{ url_for('static', filename='animate.css') }}" rel="stylesheet">
