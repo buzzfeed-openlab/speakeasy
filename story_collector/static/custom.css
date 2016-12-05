@@ -13,7 +13,8 @@ h1, h2, h3, h4, h5{
 
 /* intropage styles*/
 
-.rounded-box{
+.rounded-box,
+.rounded-story-box{
 	color:#1a1918;
 	background-color: rgba(255, 255, 255, 0.8);
 	margin-top: 50px;
@@ -80,6 +81,11 @@ i.fa.fa-phone.animated {
   margin-bottom: 20px
 }
 
+
+.caption {
+    color: #717070;
+    font-size: 0.75em;
+}
 
 @media (max-width: 600px){
 	#intro h1{
@@ -182,18 +188,6 @@ To Glyphicons (http://glyphicons.com/) for the Halflings glyphs font */
   background-color: #fff;
 }
 
-.rounded-story-box{
-  color: #1a1918;
-  background-color: #fff;
-  margin: 15px 0px 0px 0px;
-  border-radius: 10px;
-  padding: 15px 15px;
-  text-align: left;
-  -webkit-box-shadow: 10px 15px 0px 0px rgba(166,36,36,1);
-  -moz-box-shadow: 10 15px 0px 0px rgba(166,36,36,1);
-  box-shadow: 10 15px 0px 0px rgba(166,36,36,1);
-}
-
 .container-fluid.playa {
     padding: 15px 0px 15px 0px;
 }
@@ -204,9 +198,9 @@ To Glyphicons (http://glyphicons.com/) for the Halflings glyphs font */
 
 
 .btn-default {
-    color: #e93f33;
-    background-color: #fff;
-    border-color: #e93f33;
+    color: #811717;
+    background-color: rgba(255, 255, 255, 0.6);
+    border-color: #811717;
 }
 
 .btn-default:hover,
