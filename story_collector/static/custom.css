@@ -1,7 +1,14 @@
 body {
 	font-size: 18px;
 	color: #ececec;/*#1a1918*/
+  background-color: #111;
   font-family: 'Montserrat', helvetica, arial, sans-serif;
+}
+.container-fluid {
+  background: rgba(145,61,136,0.2);
+  overflow: hidden;
+    height: 100%;
+    z-index: 2;
 }
 
 h1, h2, h3, h4, h5{
@@ -88,11 +95,11 @@ i.fa.fa-phone.animated {
 
 
 .caption {
-    color: #717070;
+  opacity: .4;
     font-size: 0.75em;
 }
 .caption a {
-  color: #717070;
+  color: inherit;
   text-decoration: underline;
 }
 
