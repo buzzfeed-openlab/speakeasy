@@ -1,7 +1,6 @@
 body {
 	font-size: 18px;
-	background-color: #701816;
-	color:#1a1918;
+	color: #ececec;/*#1a1918*/
   font-family: 'Montserrat', helvetica, arial, sans-serif;
 }
 
@@ -16,14 +15,11 @@ h1, h2, h3, h4, h5{
 .rounded-box,
 .rounded-story-box{
 	color:#1a1918;
-	background-color: rgba(255, 255, 255, 0.8);
+	background-color: rgba(255, 255, 255, 0.2);
 	margin-top: 50px;
 	border-radius: 15px;
 	padding:15px 20px;
 	text-align:center;
-	-webkit-box-shadow: 21px 18px 0px 0px rgba(166,36,36,0.65);
-	-moz-box-shadow: 21px 18px 0px 0px rgba(166,36,36,0.65);
-	box-shadow: 21px 18px 0px 0px rgba(166,36,36,0.65);
 }
 
 .speechbubble:after {
@@ -31,11 +27,18 @@ h1, h2, h3, h4, h5{
   position: absolute;
   -moz-transform: rotate(180deg);
   -webkit-transform: rotate(180deg);
-  bottom: -29px;
+  bottom: -30px;
   left: 50px;
   border-width: 15px;
   border-style: solid;
-  border-color: transparent rgba(255, 255, 255, 0.8) rgba(255, 255, 255, 0.8) transparent;
+  border-color: transparent rgba(255, 255, 255, 0.2) rgba(255, 255, 255, 0.2) transparent;
+}
+
+.accent {
+  color: #a2ded0;
+}
+.accent2 {
+  color: #d4f0e9;
 }
 
 .buzzfeed-red{
@@ -46,22 +49,24 @@ h1, h2, h3, h4, h5{
 .speechbubble h1{
 	font-family: 'Montserrat', sans-serif;
 	text-transform: uppercase;
-	font-weight: bold;
 	margin-top: 10px;
 	text-align: center;
 	font-size: 3em;
 	
 }
 
+a, a:hover, a:active, a:visited {
+  color: #fb7665;
+}
 
 i.fa.fa-phone.animated {
-    color: #e93f33;
+    color: #fb7665;
     width: 45px;
     height: 45px;
     text-align: center;
     padding-top: 11px;
     border-radius: 25px;
-    border: 2px solid #e93f33;
+    border: 2px solid #fb7665;
     font-size: 0.5em !important;
     vertical-align: middle;
     margin: 0px 10px;
@@ -85,6 +90,10 @@ i.fa.fa-phone.animated {
 .caption {
     color: #717070;
     font-size: 0.75em;
+}
+.caption a {
+  color: #717070;
+  text-decoration: underline;
 }
 
 @media (max-width: 600px){
