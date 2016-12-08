@@ -22,9 +22,19 @@ experimenting with collecting audio snippets from phone calls - starting with pe
   create database story_collector
   ```
 
-4. **Set environment variables if appropriate**
-
-  see `story_collector/app_config.py`
+4. **Configure the app**
+  Two ways of doing this: (a) making a config file or (b) setting environment variables (for docker)
+  
+  *Option A*:  
+  Copy the example secret config file
+  ```bash
+  cp story_collector/app_config_secret.py.example story_collector/app_config_secret.py
+  ```
+  
+  Then, edit `story_collector/app_config_secret.py`. At a minimum, change `ADMIN_PASS`
+  
+  *Option B*:  
+  see `story_collector/app_config.py` for the names of environment variables to set
 
 5. **Initialize the database**
   
