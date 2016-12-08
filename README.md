@@ -1,5 +1,5 @@
-# un-decided
-experimenting with collecting audio snippets from phone calls - starting with people who feel conflicted about election 2016
+# speakeasy
+experimenting with collecting & exchanging audio snippets from anonymous phone calls
 
 ## Running this app locally
 1. **Install OS level dependencies**
