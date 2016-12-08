@@ -8,8 +8,8 @@ experimenting with collecting & exchanging audio snippets from anonymous phone c
 2. **Clone this repo & install app requirements**
 
   ```bash
-  git clone https://github.com/buzzfeed-openlab/un-decided.git
-  cd un-decided
+  git clone https://github.com/buzzfeed-openlab/speakeasy.git
+  cd speakeasy
   pip install -r requirements.txt
   ```
 3. **Create a MySQL database**
