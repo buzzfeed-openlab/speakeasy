@@ -12,10 +12,16 @@ import twilio.twiml
 
 app = create_app()
 
-@app.route("/")
+@app.route("/", methods=['GET', 'POST'])
 def index():
-    # TODO: grab some recordings to show
-    return render_template('index.html')
+    """Respond to incoming requests."""
+    print("greet")
+    resp = twilio.twiml.Response()
+    resp.play('http://lamivo.com/wwtd/greet.mp3')
+    resp.record(maxLength="30", action="/handle-recording")
+
+    return str(resp)
+
 
 @app.route('/browse')
 def browse():
@@ -28,6 +34,7 @@ def browse():
     return render_template('browse.html', approved=approved)
 
 
+# TODO: get rid of this
 @app.route("/greet", methods=['GET', 'POST'])
 def greet():
     """Respond to incoming requests."""
@@ -35,10 +42,9 @@ def greet():
     resp = twilio.twiml.Response()
     resp.play('http://lamivo.com/wwtd/greet.mp3')
     resp.record(maxLength="30", action="/handle-recording")
-
-
     
     return str(resp)
+
 
 @app.route("/handle-recording", methods=['GET', 'POST'])
 def handle_recording():

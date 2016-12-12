@@ -1,45 +1,16 @@
 body {
 	font-size: 18px;
-	color: #ececec;/*#1a1918*/
-  background-color: #111;
   font-family: 'Montserrat', helvetica, arial, sans-serif;
-}
-.container-fluid {
-  background: rgba(145,61,136,0.2);
-  overflow: hidden;
-    height: 100%;
-    z-index: 2;
 }
 
 h1, h2, h3, h4, h5{
   font-family: 'Montserrat', helvetica, arial, sans-serif;
 }
 
-
-
-/* intropage styles*/
-
-.rounded-box,
-.rounded-story-box{
-	color:#1a1918;
-	background-color: rgba(255, 255, 255, 0.2);
-	margin-top: 50px;
-	border-radius: 15px;
-	padding:15px 20px;
-	text-align:center;
+a, a:hover, a:active, a:visited {
+  color: #fb7665;
 }
 
-.speechbubble:after {
-  content: "";
-  position: absolute;
-  -moz-transform: rotate(180deg);
-  -webkit-transform: rotate(180deg);
-  bottom: -30px;
-  left: 50px;
-  border-width: 15px;
-  border-style: solid;
-  border-color: transparent rgba(255, 255, 255, 0.2) rgba(255, 255, 255, 0.2) transparent;
-}
 
 .accent {
   color: #a2ded0;
@@ -48,60 +19,10 @@ h1, h2, h3, h4, h5{
   color: #d4f0e9;
 }
 
-.buzzfeed-red{
-	color:#e93f33;
-  font-weight: bold;
-}
-
-.speechbubble h1{
-	font-family: 'Montserrat', sans-serif;
-	text-transform: uppercase;
-	margin-top: 10px;
-	text-align: center;
-	font-size: 3em;
-	
-}
-
-a, a:hover, a:active, a:visited {
-  color: #fb7665;
-}
-
-i.fa.fa-phone.animated {
-    color: #fb7665;
-    width: 45px;
-    height: 45px;
-    text-align: center;
-    padding-top: 11px;
-    border-radius: 25px;
-    border: 2px solid #fb7665;
-    font-size: 0.5em !important;
-    vertical-align: middle;
-    margin: 0px 10px;
-}
-
-#introtext {
-    padding: 35px 40px 60px 40px;
-    text-align: left;
-}
-
-.calltoaction{
-  text-align: center;
-  margin-bottom: 70px;
-}
-
-.calltoaction h2{
-  margin-bottom: 20px
-}
 
 
-.caption {
-  opacity: .4;
-    font-size: 0.75em;
-}
-.caption a {
-  color: inherit;
-  text-decoration: underline;
-}
+
+
 
 @media (max-width: 600px){
 	#intro h1{
