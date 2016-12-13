@@ -3,7 +3,7 @@ from flask_sqlalchemy import SQLAlchemy
 from sqlalchemy.sql.expression import func
 from functools import wraps
 from story_collector import create_app
-from story_collector.app_config import ADMIN_USER, ADMIN_PASS, USE_FAKE_DATA
+from story_collector.app_config import ADMIN_USER, ADMIN_PASS, USE_FAKE_DATA, APP_URL
 from story_collector.models import Story
 from story_collector.database import db
 from story_collector.fake_data import FAKE_STORIES
@@ -17,7 +17,7 @@ def index():
     """Respond to incoming requests."""
     print("greet")
     resp = twilio.twiml.Response()
-    resp.play('http://lamivo.com/wwtd/greet.mp3')
+    resp.play(APP_URL+'/static/assets/greet.mp3')
     resp.record(maxLength="30", action="/handle-recording")
 
     return str(resp)
@@ -40,7 +40,7 @@ def greet():
     """Respond to incoming requests."""
     print("greet")
     resp = twilio.twiml.Response()
-    resp.play('http://lamivo.com/wwtd/greet.mp3')
+    resp.play(APP_URL+'/static/assets/greet.mp3')
     resp.record(maxLength="30", action="/handle-recording")
     
     return str(resp)
@@ -77,9 +77,11 @@ def handle_recording():
     random_story = Story.query.filter_by(is_approved=True).order_by(func.rand()).first()
 
     if random_story:
-        resp.say("Listen to what someone else has to say:")
+        resp.play(APP_URL+'/static/assets/thanks.mp3')
         resp.pause(length=1)
         resp.play(random_story.recording_url)
+        resp.pause(length=3)
+        resp.play(APP_URL+'/static/assets/bye.mp3')
 
     return str(resp)
 
@@ -94,7 +96,7 @@ def collect_zip():
     db.session.commit()
 
     resp = twilio.twiml.Response()
-    resp.play('http://lamivo.com/wwtd/outro.mp3')
+    # resp.play('http://lamivo.com/wwtd/outro.mp3')
     return str(resp)
 
 
