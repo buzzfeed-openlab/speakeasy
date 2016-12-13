@@ -3,7 +3,7 @@ from flask_sqlalchemy import SQLAlchemy
 from sqlalchemy.sql.expression import func
 from functools import wraps
 from story_collector import create_app
-from story_collector.app_config import ADMIN_USER, ADMIN_PASS, USE_FAKE_DATA
+from story_collector.app_config import ADMIN_USER, ADMIN_PASS, USE_FAKE_DATA, APP_URL
 from story_collector.models import Story
 from story_collector.database import db
 from story_collector.fake_data import FAKE_STORIES
@@ -12,10 +12,16 @@ import twilio.twiml
 
 app = create_app()
 
-@app.route("/")
+@app.route("/", methods=['GET', 'POST'])
 def index():
-    # TODO: grab some recordings to show
-    return render_template('index.html')
+    """Respond to incoming requests."""
+    print("greet")
+    resp = twilio.twiml.Response()
+    resp.play(APP_URL+'/static/assets/greet.mp3')
+    resp.record(maxLength="30", action="/handle-recording")
+
+    return str(resp)
+
 
 @app.route('/browse')
 def browse():
@@ -28,17 +34,17 @@ def browse():
     return render_template('browse.html', approved=approved)
 
 
+# TODO: get rid of this
 @app.route("/greet", methods=['GET', 'POST'])
 def greet():
     """Respond to incoming requests."""
     print("greet")
     resp = twilio.twiml.Response()
-    resp.play('http://lamivo.com/wwtd/greet.mp3')
+    resp.play(APP_URL+'/static/assets/greet.mp3')
     resp.record(maxLength="30", action="/handle-recording")
-
-
     
     return str(resp)
+
 
 @app.route("/handle-recording", methods=['GET', 'POST'])
 def handle_recording():
@@ -71,9 +77,11 @@ def handle_recording():
     random_story = Story.query.filter_by(is_approved=True).order_by(func.rand()).first()
 
     if random_story:
-        resp.say("Listen to what someone else has to say:")
+        resp.play(APP_URL+'/static/assets/thanks.mp3')
         resp.pause(length=1)
         resp.play(random_story.recording_url)
+        resp.pause(length=3)
+        resp.play(APP_URL+'/static/assets/bye.mp3')
 
     return str(resp)
 
@@ -88,7 +96,7 @@ def collect_zip():
     db.session.commit()
 
     resp = twilio.twiml.Response()
-    resp.play('http://lamivo.com/wwtd/outro.mp3')
+    # resp.play('http://lamivo.com/wwtd/outro.mp3')
     return str(resp)
 
 

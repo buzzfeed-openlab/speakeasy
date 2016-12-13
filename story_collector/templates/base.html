@@ -11,15 +11,6 @@
     <!-- favicon -->
     <link rel="shortcut icon" type="image/png" href="{{ url_for('static', filename='images/favicon.png') }}">
 
-    <!-- background image -->
-    <style>
-      body{
-        background-image: url( {{ url_for('static', filename='background.png') }});
-          background-size: cover;
-      }
-
-    </style>
-
     <!-- Bootstrap core CSS -->
     <link href="{{ url_for('static', filename='bootstrap.min.css') }}" rel="stylesheet">
     <link href="http://maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css" rel="stylesheet">
@@ -77,9 +68,9 @@
     <!-- Bootstrap core JavaScript
     ================================================== -->
     <!-- Placed at the end of the document so the pages load faster -->
-    <script src="{{ url_for('static', filename='jquery-3.1.1.min.js') }}"></script>
-    <script src="{{ url_for('static', filename='bootstrap.min.js') }}"></script>
-    <script src="{{ url_for('static', filename='audioplayer.js') }}"></script>
+    <script src="{{ url_for('static', filename='jquery-3.1.1.min.js') }}" defer></script>
+    <script src="{{ url_for('static', filename='bootstrap.min.js') }}" defer></script>
+    <script src="{{ url_for('static', filename='audioplayer.js') }}" defer></script>
 
     {% block extra_javascript %}{% endblock %}
 

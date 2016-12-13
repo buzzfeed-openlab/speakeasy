@@ -1,7 +1,5 @@
 body {
 	font-size: 18px;
-	background-color: #701816;
-	color:#1a1918;
   font-family: 'Montserrat', helvetica, arial, sans-serif;
 }
 
@@ -9,83 +7,22 @@ h1, h2, h3, h4, h5{
   font-family: 'Montserrat', helvetica, arial, sans-serif;
 }
 
-
-
-/* intropage styles*/
-
-.rounded-box,
-.rounded-story-box{
-	color:#1a1918;
-	background-color: rgba(255, 255, 255, 0.8);
-	margin-top: 50px;
-	border-radius: 15px;
-	padding:15px 20px;
-	text-align:center;
-	-webkit-box-shadow: 21px 18px 0px 0px rgba(166,36,36,0.65);
-	-moz-box-shadow: 21px 18px 0px 0px rgba(166,36,36,0.65);
-	box-shadow: 21px 18px 0px 0px rgba(166,36,36,0.65);
-}
-
-.speechbubble:after {
-  content: "";
-  position: absolute;
-  -moz-transform: rotate(180deg);
-  -webkit-transform: rotate(180deg);
-  bottom: -29px;
-  left: 50px;
-  border-width: 15px;
-  border-style: solid;
-  border-color: transparent rgba(255, 255, 255, 0.8) rgba(255, 255, 255, 0.8) transparent;
-}
-
-.buzzfeed-red{
-	color:#e93f33;
-  font-weight: bold;
-}
-
-.speechbubble h1{
-	font-family: 'Montserrat', sans-serif;
-	text-transform: uppercase;
-	font-weight: bold;
-	margin-top: 10px;
-	text-align: center;
-	font-size: 3em;
-	
+a, a:hover, a:active, a:visited {
+  color: #fb7665;
 }
 
 
-i.fa.fa-phone.animated {
-    color: #e93f33;
-    width: 45px;
-    height: 45px;
-    text-align: center;
-    padding-top: 11px;
-    border-radius: 25px;
-    border: 2px solid #e93f33;
-    font-size: 0.5em !important;
-    vertical-align: middle;
-    margin: 0px 10px;
+.accent {
+  color: #a2ded0;
 }
-
-#introtext {
-    padding: 35px 40px 60px 40px;
-    text-align: left;
-}
-
-.calltoaction{
-  text-align: center;
-  margin-bottom: 70px;
-}
-
-.calltoaction h2{
-  margin-bottom: 20px
+.accent2 {
+  color: #d4f0e9;
 }
 
 
-.caption {
-    color: #717070;
-    font-size: 0.75em;
-}
+
+
+
 
 @media (max-width: 600px){
 	#intro h1{
