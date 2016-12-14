@@ -5,13 +5,22 @@ experimenting with collecting & exchanging audio snippets from anonymous phone c
 1. **Install OS level dependencies**
   - Python 3
   - MySQL
-2. **Clone this repo & install app requirements**
-
+  
+2. **Clone this repo**
   ```bash
   git clone https://github.com/buzzfeed-openlab/speakeasy.git
   cd speakeasy
+  ```
+  
+3. **Create a virtualenv (optional) & install app requirements**  
+ 
+  ```bash
+  virtualenv -p /usr/bin/python3 speakeasy
+  source speakeasy/bin/activate
   pip install -r requirements.txt
   ```
+  Note: If you're not excited about [virtual environments](http://docs.python-guide.org/en/latest/dev/virtualenvs/), you can also just install the requirements directly. 
+
 3. **Create a MySQL database**
 
   ```bash
@@ -47,3 +56,5 @@ experimenting with collecting & exchanging audio snippets from anonymous phone c
   ```bash
   python app.py
   ```
+  
+
