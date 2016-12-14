@@ -28,8 +28,10 @@ experimenting with collecting & exchanging audio snippets from anonymous phone c
   ```
   & then
   ```
-  create database story_collector
+  create database story_collector;
   ```
+  
+  If you're working locally, you're good to go. But if you're going to host this on a shared server you probably want to create a new user for this database so it isn't all `root`.
 
 4. **Configure the app**
   Two ways of doing this: (a) making a config file or (b) setting environment variables (for docker)
