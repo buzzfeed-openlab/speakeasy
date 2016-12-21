@@ -10,9 +10,9 @@ from story_collector.fake_data import FAKE_STORIES
 import twilio.twiml
 
 
-app = create_app()
+application = create_app()
 
-@app.route("/", methods=['GET', 'POST'])
+@application.route("/", methods=['GET', 'POST'])
 def index():
     """Respond to incoming requests."""
     print("greet")
@@ -23,7 +23,7 @@ def index():
     return str(resp)
 
 
-@app.route('/browse')
+@application.route('/browse')
 def browse():
 
     if USE_FAKE_DATA:
@@ -35,7 +35,7 @@ def browse():
 
 
 # TODO: get rid of this
-@app.route("/greet", methods=['GET', 'POST'])
+@application.route("/greet", methods=['GET', 'POST'])
 def greet():
     """Respond to incoming requests."""
     print("greet")
@@ -46,7 +46,7 @@ def greet():
     return str(resp)
 
 
-@app.route("/handle-recording", methods=['GET', 'POST'])
+@application.route("/handle-recording", methods=['GET', 'POST'])
 def handle_recording():
     """Play back the caller's recording."""
 
@@ -86,7 +86,7 @@ def handle_recording():
     return str(resp)
 
 
-@app.route("/collect-zip", methods=['GET', 'POST'])
+@application.route("/collect-zip", methods=['GET', 'POST'])
 def collect_zip():
 
     pressed = request.values.get('Digits', None)
@@ -122,7 +122,7 @@ def requires_auth(f):
     return decorated
 
 
-@app.route('/review')
+@application.route('/review')
 @requires_auth
 def review():
     if USE_FAKE_DATA:
@@ -136,7 +136,7 @@ def review():
 
     return render_template('review.html', review_queue = review_queue, approved=approved, disapproved=disapproved)
 
-@app.route('/approve/<story_id>')
+@application.route('/approve/<story_id>')
 @requires_auth
 def approve(story_id):
     story = Story.query.get(story_id)
@@ -144,7 +144,7 @@ def approve(story_id):
     db.session.commit()
     return redirect('/review')
 
-@app.route('/disapprove/<story_id>')
+@application.route('/disapprove/<story_id>')
 @requires_auth
 def disapprove(story_id):
     story = Story.query.get(story_id)
@@ -155,4 +155,4 @@ def disapprove(story_id):
 
 
 if __name__ == "__main__":
-    app.run(debug=True, host='0.0.0.0')
+    application.run(debug=True, host='0.0.0.0')
