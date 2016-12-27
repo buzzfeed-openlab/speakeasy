@@ -10,10 +10,10 @@ if os.path.isfile(os.path.dirname(__file__)+'/app_config_secret.py'):
 # & assigns them to defaults if env vars don't exist
 # (this is for deploying w/ docker)
 else:
-    DB_USER = os.getenv('MYSQL_USER', 'root')
-    DB_PW = os.getenv('MYSQL_PASSWORD', '')
-    DB_HOST = os.getenv('MYSQL_HOST', 'localhost')
-    DB_NAME = os.getenv('MYSQL_DB', 'story_collector')
+    DB_USER = os.getenv('DB_USER', 'root')
+    DB_PW = os.getenv('DB_PW', '')
+    DB_HOST = os.getenv('DB_HOST', 'localhost')
+    DB_NAME = os.getenv('DB_NAME', 'story_collector')
 
     ADMIN_USER = os.getenv('ADMIN_USER', 'admin')
     ADMIN_PASS = os.getenv('ADMIN_PASS', 'something-secret')
