@@ -1,11 +1,12 @@
 branch-defaults:
-  docker:
-    environment: speakeasy-prod
-    group_suffix: null
+  master:
+    environment: speakeasy-dev
 global:
   application_name: speakeasy
-  default_ec2_keyname: speakeasy
+  branch: null
+  default_ec2_keyname: cathy
   default_platform: Docker 1.11.2
   default_region: us-east-1
   profile: bf-openlab
+  repository: null
   sc: git
