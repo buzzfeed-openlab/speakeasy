@@ -1,6 +1,6 @@
 import datetime
 
-from story_collector.database import db
+from . import db
 
 
 class Story(db.Model):

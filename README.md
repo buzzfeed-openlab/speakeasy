@@ -47,16 +47,13 @@ experimenting with collecting & exchanging audio snippets from anonymous phone c
   *Option B*:  
   see `story_collector/app_config.py` for the names of environment variables to set
 
-5. **Initialize the database**
-  
-  ```bash
-  python init_db.py
-  ```
-
-6. **Run the app**
+5. **Run the app**
   
   ```bash
   python app.py
   ```
+
+6. **Initialize the database**
   
+  Visit the `/initialize` route (e.g. `localhost:5000/intialize`) & enter admin credentials (`ADMIN_USER` & `ADMIN_PASS`). This will create the story table & seed it with data.
 

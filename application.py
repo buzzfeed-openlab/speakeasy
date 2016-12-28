@@ -2,10 +2,9 @@ from flask import redirect, request, render_template, Response
 from flask_sqlalchemy import SQLAlchemy
 from sqlalchemy.sql.expression import func
 from functools import wraps
-from story_collector import create_app
+from story_collector import create_app, db
 from story_collector.app_config import ADMIN_USER, ADMIN_PASS, USE_FAKE_DATA, APP_URL
 from story_collector.models import Story
-from story_collector.database import db
 from story_collector.fake_data import FAKE_STORIES
 import twilio.twiml
 
