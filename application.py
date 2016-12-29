@@ -17,6 +17,8 @@ if NOTIFY_FROM_NUM and NOTIFY_TO_NUM and TWILIO_ACCOUNT_SID and TWILIO_AUTH_TOKE
         twilio_client = TwilioRestClient(TWILIO_ACCOUNT_SID, TWILIO_AUTH_TOKEN)
     except twilio.exceptions.TwilioException:
         twilio_client = None
+else:
+    twilio_client = None
 
 
 @application.route("/", methods=['GET', 'POST'])
