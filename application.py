@@ -3,13 +3,21 @@ from flask_sqlalchemy import SQLAlchemy
 from sqlalchemy.sql.expression import func
 from functools import wraps
 from story_collector import create_app, db
-from story_collector.app_config import ADMIN_USER, ADMIN_PASS, USE_FAKE_DATA, APP_URL
+from story_collector.app_config import ADMIN_USER, ADMIN_PASS, USE_FAKE_DATA, APP_URL, NOTIFY_FROM_NUM, NOTIFY_TO_NUM, TWILIO_ACCOUNT_SID, TWILIO_AUTH_TOKEN
 from story_collector.models import Story
 from story_collector.fake_data import FAKE_STORIES
 import twilio.twiml
+from twilio.rest import TwilioRestClient
 
 
 application = create_app()
+
+if NOTIFY_FROM_NUM and NOTIFY_TO_NUM and TWILIO_ACCOUNT_SID and TWILIO_AUTH_TOKEN:
+    try:
+        twilio_client = TwilioRestClient(TWILIO_ACCOUNT_SID, TWILIO_AUTH_TOKEN)
+    except twilio.exceptions.TwilioException:
+        twilio_client = None
+
 
 @application.route("/", methods=['GET', 'POST'])
 def index():
@@ -18,6 +26,9 @@ def index():
     resp = twilio.twiml.Response()
     resp.play(APP_URL+'/static/assets/greet.mp3')
     resp.record(maxLength="30", action="/handle-recording")
+
+    if twilio_client:
+        notify('someone called!')
 
     return str(resp)
 
@@ -31,18 +42,6 @@ def browse():
         approved = Story.query.filter_by(is_approved=True).all()
 
     return render_template('browse.html', approved=approved)
-
-
-# TODO: get rid of this
-@application.route("/greet", methods=['GET', 'POST'])
-def greet():
-    """Respond to incoming requests."""
-    print("greet")
-    resp = twilio.twiml.Response()
-    resp.play(APP_URL+'/static/assets/greet.mp3')
-    resp.record(maxLength="30", action="/handle-recording")
-    
-    return str(resp)
 
 
 @application.route("/handle-recording", methods=['GET', 'POST'])
@@ -81,6 +80,8 @@ def handle_recording():
         resp.play(random_story.recording_url)
         resp.pause(length=3)
         resp.play(APP_URL+'/static/assets/bye.mp3')
+
+    notify("recorded: %s \nreceived: %s" %(new_story.recording_url, random_story.recording_url))
 
     return str(resp)
 
@@ -177,6 +178,8 @@ def initialize():
 
     return redirect('/')
 
+def notify(msg):
+    twilio_client.messages.create(to=NOTIFY_TO_NUM, from_=NOTIFY_FROM_NUM, body=msg)
 
 
 
