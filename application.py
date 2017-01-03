@@ -29,8 +29,9 @@ def index():
     resp.play(APP_URL+'/static/assets/greet.mp3')
     resp.record(maxLength="30", action="/handle-recording")
 
-    if twilio_client:
-        notify('someone called!')
+    from_number = request.values.get('From', None)
+    if twilio_client and from_number:
+        notify('someone called! %s' %from_number[2:5])
 
     return str(resp)
 
