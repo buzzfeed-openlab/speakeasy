@@ -26,8 +26,26 @@ def index():
     """Respond to incoming requests."""
     print("greet")
     resp = twilio.twiml.Response()
-    resp.play(APP_URL+'/static/assets/greet.mp3')
-    resp.record(maxLength="30", action="/handle-recording")
+    # resp.play(APP_URL+'/static/assets/greet.mp3')
+    resp.say("greeting placeholder")
+
+
+    # get a random story that has been approved and play it
+    print("grabbing a random story")
+    random_story = Story.query.filter_by(is_approved=True).order_by(func.rand()).first()
+
+    if random_story:
+        resp.say("here's what someone else had to say")
+        resp.pause(length=1)
+        resp.play(random_story.recording_url)
+        resp.pause(length=3)
+        resp.play(APP_URL+'/static/assets/bye.mp3')
+
+
+    resp.say("press 1 to record a message")
+    resp.gather(numDigits=1, action="/handle-keypress", method="POST")
+
+    # resp.record(maxLength="30", action="/handle-recording")
 
     from_number = request.values.get('From', None)
     if twilio_client and from_number:
@@ -47,9 +65,17 @@ def browse():
     return render_template('browse.html', approved=approved)
 
 
+@application.route("/handle-keypress", methods=['GET', 'POST'])
+def handle_keypress():
+
+    pressed = request.values.get('Digits', None)
+
+    if pressed == '1':
+        resp.record(maxLength="30", action="/handle-recording")
+
+
 @application.route("/handle-recording", methods=['GET', 'POST'])
 def handle_recording():
-    """Play back the caller's recording."""
 
     recording_url = request.values.get('RecordingUrl', None)
     call_sid = request.values.get('CallSid', None)
@@ -73,16 +99,17 @@ def handle_recording():
     # resp.pause(length=20)
 
 
-    # get a random story that has been approved and play it
-    print("grabbing a random story")
-    random_story = Story.query.filter_by(is_approved=True).order_by(func.rand()).first()
+    # # get a random story that has been approved and play it
+    # print("grabbing a random story")
+    # random_story = Story.query.filter_by(is_approved=True).order_by(func.rand()).first()
 
-    if random_story:
-        resp.play(APP_URL+'/static/assets/thanks.mp3')
-        resp.pause(length=1)
-        resp.play(random_story.recording_url)
-        resp.pause(length=3)
-        resp.play(APP_URL+'/static/assets/bye.mp3')
+    # if random_story:
+    #     resp.play(APP_URL+'/static/assets/thanks.mp3')
+    #     resp.pause(length=1)
+    #     resp.play(random_story.recording_url)
+    #     resp.pause(length=3)
+    #     resp.play(APP_URL+'/static/assets/bye.mp3')
+    resp.say("thanks!")
 
     notify("recorded: %s \nreceived: %s" %(new_story.recording_url, random_story.recording_url))
 
