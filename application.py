@@ -84,6 +84,7 @@ def handle_recording():
     recording_url = request.values.get('RecordingUrl', None)
     call_sid = request.values.get('CallSid', None)
     from_number = request.values.get('From', None)
+    to_number = request.values.get('To', None)
 
     resp = twilio.twiml.Response()
 
@@ -93,7 +94,7 @@ def handle_recording():
 
     print("recording url: %s" %recording_url)
 
-    new_story = Story(call_sid, from_number, recording_url)
+    new_story = Story(call_sid, from_number, to_number, recording_url)
     db.session.add(new_story)
     db.session.commit()
 
@@ -144,7 +145,6 @@ def requires_auth(f):
         return f(*args, **kwargs)
     return decorated
 
-
 @application.route('/review')
 @requires_auth
 def review():
@@ -175,7 +175,6 @@ def disapprove(story_id):
     db.session.commit()
     return redirect('/review')
 
-
 @application.route('/initialize')
 @requires_auth
 def initialize():
@@ -191,7 +190,7 @@ def initialize():
     print("  * seeding the db with a response")
     if not Story.query.filter_by(call_sid='seed1').first():
         # this is lam's story about being an immigrant
-        rec = Story('seed1', '', 'https://api.twilio.com/2010-04-01/Accounts/AC8820553f8206a5c5f7608355621ccd90/Recordings/RE6ebf1e9bbfc378667985b9bdf032ebac')
+        rec = Story('seed1', '', '', 'https://api.twilio.com/2010-04-01/Accounts/AC8820553f8206a5c5f7608355621ccd90/Recordings/RE6ebf1e9bbfc378667985b9bdf032ebac')
         rec.is_approved = True
         db.session.add(rec)
         db.session.commit()
