@@ -21,8 +21,12 @@ else:
     twilio_client = None
 
 
-@application.route("/", methods=['GET', 'POST'])
+@application.route("/")
 def index():
+    return "hello world" # update this
+
+@application.route("/incoming-call", methods=['GET', 'POST'])
+def incoming_call():
     """Respond to incoming requests."""
     print("greet")
     resp = twilio.twiml.Response()
