@@ -39,13 +39,10 @@ def index():
         resp.pause(length=1)
         resp.play(random_story.recording_url)
         resp.pause(length=3)
-        resp.play(APP_URL+'/static/assets/bye.mp3')
 
 
     resp.say("press 1 to record a message")
     resp.gather(numDigits=1, action="/handle-keypress", method="POST")
-
-    # resp.record(maxLength="30", action="/handle-recording")
 
     from_number = request.values.get('From', None)
     if twilio_client and from_number:
@@ -69,9 +66,16 @@ def browse():
 def handle_keypress():
 
     pressed = request.values.get('Digits', None)
+    resp = twilio.twiml.Response()
 
     if pressed == '1':
+        resp.say("leave your message after the beep and press any key when you're done")
         resp.record(maxLength="30", action="/handle-recording")
+    else:
+        resp.say("press 1 to record a message")
+        resp.gather(numDigits=1, action="/handle-keypress", method="POST")
+
+    return str(resp)
 
 
 @application.route("/handle-recording", methods=['GET', 'POST'])
@@ -98,20 +102,10 @@ def handle_recording():
     # resp.gather(numDigits=5, action="/collect-zip", method="POST")
     # resp.pause(length=20)
 
-
-    # # get a random story that has been approved and play it
-    # print("grabbing a random story")
-    # random_story = Story.query.filter_by(is_approved=True).order_by(func.rand()).first()
-
-    # if random_story:
-    #     resp.play(APP_URL+'/static/assets/thanks.mp3')
-    #     resp.pause(length=1)
-    #     resp.play(random_story.recording_url)
-    #     resp.pause(length=3)
-    #     resp.play(APP_URL+'/static/assets/bye.mp3')
     resp.say("thanks!")
 
-    notify("recorded: %s \nreceived: %s" %(new_story.recording_url, random_story.recording_url))
+    if twilio_client:
+        notify("recorded: %s" %(new_story.recording_url))
 
     return str(resp)
 
@@ -126,7 +120,6 @@ def collect_zip():
     db.session.commit()
 
     resp = twilio.twiml.Response()
-    # resp.play('http://lamivo.com/wwtd/outro.mp3')
     return str(resp)
 
 
