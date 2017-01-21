@@ -37,11 +37,11 @@ def incoming_call():
     random_story = Story.query.filter_by(is_approved=True).order_by(func.rand()).first()
 
     if random_story:
-        resp.pause(length=1)
+        resp.pause(length=2)
         resp.play(APP_URL+'/static/assets/random_msg_intro.mp3')
-        resp.pause(length=1)
+        resp.pause(length=2)
         resp.play(random_story.recording_url)
-        resp.pause(length=1)
+        resp.pause(length=3)
 
 
     resp.play(APP_URL+'/static/assets/contribution_prompt.mp3')
@@ -75,7 +75,7 @@ def handle_keypress():
         resp.play(APP_URL+'/static/assets/recording_prompt.mp3')
         resp.record(maxLength="30", action="/handle-recording")
     else:
-        resp.say("press 1 to record a message")
+        resp.play(APP_URL+'/static/assets/contribution_prompt2.mp3')
         resp.gather(numDigits=1, action="/handle-keypress", method="POST")
 
     return str(resp)
