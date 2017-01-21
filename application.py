@@ -30,22 +30,21 @@ def incoming_call():
     """Respond to incoming requests."""
     print("greet")
     resp = twilio.twiml.Response()
-    # resp.play(APP_URL+'/static/assets/greet.mp3')
-    resp.say("greeting placeholder")
-
+    resp.play(APP_URL+'/static/assets/intro.mp3')
 
     # get a random story that has been approved and play it
     print("grabbing a random story")
     random_story = Story.query.filter_by(is_approved=True).order_by(func.rand()).first()
 
     if random_story:
-        resp.say("here's what someone else had to say")
+        resp.pause(length=1)
+        resp.play(APP_URL+'/static/assets/random_msg_intro.mp3')
         resp.pause(length=1)
         resp.play(random_story.recording_url)
-        resp.pause(length=3)
+        resp.pause(length=1)
 
 
-    resp.say("press 1 to record a message")
+    resp.play(APP_URL+'/static/assets/contribution_prompt.mp3')
     resp.gather(numDigits=1, action="/handle-keypress", method="POST")
 
     from_number = request.values.get('From', None)
@@ -73,7 +72,7 @@ def handle_keypress():
     resp = twilio.twiml.Response()
 
     if pressed == '1':
-        resp.say("leave your message after the beep and press any key when you're done")
+        resp.play(APP_URL+'/static/assets/recording_prompt.mp3')
         resp.record(maxLength="30", action="/handle-recording")
     else:
         resp.say("press 1 to record a message")
@@ -107,7 +106,7 @@ def handle_recording():
     # resp.gather(numDigits=5, action="/collect-zip", method="POST")
     # resp.pause(length=20)
 
-    resp.say("thanks!")
+    resp.play(APP_URL+'/static/assets/bye.mp3')
 
     if twilio_client:
         notify("recorded: %s" %(new_story.recording_url))
