@@ -38,8 +38,6 @@ def incoming_call():
 
     if random_story:
         resp.pause(length=2)
-        resp.play(APP_URL+'/static/assets/random_msg_intro.mp3')
-        resp.pause(length=2)
         resp.play(random_story.recording_url)
         resp.pause(length=3)
 
