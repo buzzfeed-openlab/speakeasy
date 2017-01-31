@@ -37,14 +37,15 @@ def incoming_call():
     random_story = Story.query.filter_by(is_approved=True).order_by(func.rand()).first()
 
     if random_story:
-        resp.pause(length=2)
+        resp.pause(length=1)
         resp.play(random_story.recording_url)
-        resp.pause(length=3)
+        resp.pause(length=2)
 
 
     resp.play(APP_URL+'/static/assets/prompt.mp3')
+    resp.pause(length=2)
     resp.play(APP_URL+'/static/assets/press_to_share.mp3')
-    resp.gather(numDigits=1, action="/handle-keypress", method="POST")
+    resp.gather(numDigits=1, action="/handle-keypress", method="POST", timeout=30)
 
     from_number = request.values.get('From', None)
     if twilio_client and from_number:
@@ -75,7 +76,7 @@ def handle_keypress():
         resp.record(maxLength="30", action="/handle-recording")
     else:
         resp.play(APP_URL+'/static/assets/press_to_share.mp3')
-        resp.gather(numDigits=1, action="/handle-keypress", method="POST")
+        resp.gather(numDigits=1, action="/handle-keypress", method="POST", timeout=30)
 
     return str(resp)
 
