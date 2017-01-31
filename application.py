@@ -73,7 +73,7 @@ def handle_keypress():
 
     if pressed == '1':
         resp.play(APP_URL+'/static/assets/recording_instructions.mp3')
-        resp.record(maxLength="30", action="/handle-recording")
+        resp.record(maxLength="600", action="/handle-recording")
     else:
         resp.play(APP_URL+'/static/assets/press_to_share.mp3')
         resp.gather(numDigits=1, action="/handle-keypress", method="POST", timeout=30)
