@@ -42,7 +42,8 @@ def incoming_call():
         resp.pause(length=3)
 
 
-    resp.play(APP_URL+'/static/assets/contribution_prompt.mp3')
+    resp.play(APP_URL+'/static/assets/prompt.mp3')
+    resp.play(APP_URL+'/static/assets/press_to_share.mp3')
     resp.gather(numDigits=1, action="/handle-keypress", method="POST")
 
     from_number = request.values.get('From', None)
@@ -70,10 +71,10 @@ def handle_keypress():
     resp = twilio.twiml.Response()
 
     if pressed == '1':
-        resp.play(APP_URL+'/static/assets/recording_prompt.mp3')
+        resp.play(APP_URL+'/static/assets/recording_instructions.mp3')
         resp.record(maxLength="30", action="/handle-recording")
     else:
-        resp.play(APP_URL+'/static/assets/contribution_prompt2.mp3')
+        resp.play(APP_URL+'/static/assets/press_to_share.mp3')
         resp.gather(numDigits=1, action="/handle-keypress", method="POST")
 
     return str(resp)
@@ -104,7 +105,8 @@ def handle_recording():
     # resp.gather(numDigits=5, action="/collect-zip", method="POST")
     # resp.pause(length=20)
 
-    resp.play(APP_URL+'/static/assets/bye.mp3')
+    resp.play(APP_URL+'/static/assets/thanks.mp3')
+    resp.play(APP_URL+'/static/assets/end.mp3')
 
     if twilio_client:
         notify("recorded: %s" %(new_story.recording_url))
