@@ -1,13 +1,12 @@
 {% extends 'base.html' %}
 
 {% block content %}
-<div class="container">
   <div class="row">
     <div class="col-sm-8 col-sm-offset-2">
-      <h1>Recordings to review</h1>
+      <h1>Review Queue</h1>
       <table class="table table-condensed small">
         <thead>
-          <tr><th>Recording</th><th>Date</th><th>Zip</th><th></th><th></th></tr>
+          <tr><th>Recording</th><th>Date</th><th></th></tr>
         </thead>
         <tbody>
           {% for story in review_queue %}
@@ -18,15 +17,12 @@
                 Your browser does not support the audio element.
               </audio>
             </td>
-            <td>{{ story.dt }}</td>
-            <td>{{ story.caller_zip }}</td>
-            <td>
-              <a class="btn btn-success btn-sm" href="/approve/{{ story.id }}" title="Approve">
+            <td>{{ story.dt.strftime('%m/%d %H:%m') }}</td>
+            <td class="text-right">
+              <a class="btn btn-success btn-xs" href="/approve/{{ story.id }}" title="Approve">
                 <i class="fa fa-check" aria-hidden="true"></i>
               </a>
-            </td>
-            <td>
-              <a class="btn btn-warning btn-sm" href="/disapprove/{{ story.id }}" title="Disapprove">
+              <a class="btn btn-warning btn-xs" href="/disapprove/{{ story.id }}" title="Disapprove">
                 <i class="fa fa-times" aria-hidden="true"></i>
               </a>
             </td>
@@ -43,7 +39,7 @@
 
       <table class="table table-condensed small">
         <thead>
-          <tr><th>Recording</th><th>Date</th><th>Zip</th><th></th></tr>
+          <tr><th>Recording</th><th>Date</th><th></th></tr>
         </thead>
         <tbody>
           {% for story in approved %}
@@ -54,10 +50,9 @@
                 Your browser does not support the audio element.
               </audio>
             </td>
-            <td>{{ story.dt }}</td>
-            <td>{{ story.caller_zip }}</td>
-            <td>
-              <a class="btn btn-warning btn-sm" href="/disapprove/{{ story.id }}" title="Disapprove">
+            <td>{{ story.dt.strftime('%m/%d %H:%m') }}</td>
+            <td class="text-right">
+              <a class="btn btn-warning btn-xs" href="/disapprove/{{ story.id }}" title="Disapprove">
                 <i class="fa fa-times" aria-hidden="true"></i>
               </a>
             </td>
@@ -75,7 +70,7 @@
 
       <table class="table table-condensed small">
         <thead>
-          <tr><th>Recording</th><th>Date</th><th>Zip</th><th></th></tr>
+          <tr><th>Recording</th><th>Date</th><th></th></tr>
         </thead>
         <tbody>
           {% for story in disapproved %}
@@ -86,10 +81,9 @@
                 Your browser does not support the audio element.
               </audio>
             </td>
-            <td>{{ story.dt }}</td>
-            <td>{{ story.caller_zip }}</td>
-            <td>
-              <a class="btn btn-success btn-sm" href="/approve/{{ story.id }}" title="Approve">
+            <td>{{ story.dt.strftime('%m/%d %H:%m') }}</td>
+            <td class="text-right">
+              <a class="btn btn-success btn-xs" href="/approve/{{ story.id }}" title="Approve">
                 <i class="fa fa-check" aria-hidden="true"></i>
               </a>
             </td>
@@ -100,5 +94,4 @@
 
     </div>
   </div>
-</div>
 {% endblock %}
