@@ -28,8 +28,8 @@ def index():
 @application.route("/incoming-call", methods=['GET', 'POST'])
 def incoming_call():
     """Respond to incoming requests."""
-    print("greet")
     resp = twilio.twiml.Response()
+    # recording: introducing the project
     resp.play(APP_URL+'/static/assets/intro.mp3')
 
     # get a random story that has been approved and play it
@@ -41,10 +41,9 @@ def incoming_call():
         resp.pause(length=2)
 
 
-    resp.play(APP_URL+'/static/assets/prompt.mp3')
+    resp.play(APP_URL+'/static/assets/prompt.mp3') # recording: the prompt
     resp.pause(length=1)
-    resp.play(APP_URL+'/static/assets/press_to_share.mp3')
-    resp.pause(length=1)
+    resp.play(APP_URL+'/static/assets/share_press.mp3') # recording: to share msg, press 1
     resp.gather(numDigits=1, action="/handle-keypress", method="POST", timeout=30)
 
     from_number = request.values.get('From', None)
@@ -72,10 +71,10 @@ def handle_keypress():
     resp = twilio.twiml.Response()
 
     if pressed == '1':
-        resp.play(APP_URL+'/static/assets/recording_instructions.mp3')
+        resp.play(APP_URL+'/static/assets/share_record.mp3')
         resp.record(maxLength="600", action="/handle-recording")
     else:
-        resp.play(APP_URL+'/static/assets/press_to_share.mp3')
+        resp.play(APP_URL+'/static/assets/share_press.mp3')
         resp.gather(numDigits=1, action="/handle-keypress", method="POST", timeout=30)
 
     return str(resp)
@@ -107,7 +106,6 @@ def handle_recording():
     # resp.pause(length=20)
 
     resp.play(APP_URL+'/static/assets/thanks.mp3')
-    resp.play(APP_URL+'/static/assets/end.mp3')
 
     if twilio_client:
         notify("recorded: %s" %(new_story.recording_url))
