@@ -48,7 +48,7 @@ def incoming_call():
 
     from_number = request.values.get('From', None)
     if twilio_client and from_number:
-        notify('someone called! %s' %from_number[2:5])
+        notify('cali on the edge - call %s' %from_number[2:5])
 
     return str(resp)
 
@@ -108,7 +108,7 @@ def handle_recording():
     resp.play(APP_URL+'/static/assets/thanks.mp3')
 
     if twilio_client:
-        notify("recorded: %s" %(new_story.recording_url))
+        notify("cali on the edge - recorded: %s" %(new_story.recording_url))
 
     return str(resp)
 
@@ -192,7 +192,7 @@ def initialize():
     print("  * seeding the db with a response")
     if not Story.query.filter_by(call_sid='seed1').first():
         # this is lam's story about being an immigrant
-        rec = Story('seed1', '', '', 'https://api.twilio.com/2010-04-01/Accounts/AC8820553f8206a5c5f7608355621ccd90/Recordings/RE6ebf1e9bbfc378667985b9bdf032ebac')
+        rec = Story('seed1', '', '', 'https://api.twilio.com/2010-04-01/Accounts/AC8820553f8206a5c5f7608355621ccd90/Recordings/RE5ffe2dfda6f0ef1ec4d8bbe43351e3b2')
         rec.is_approved = True
         db.session.add(rec)
         db.session.commit()
