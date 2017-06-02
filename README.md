@@ -22,7 +22,7 @@ Notes:
 - if the virtualenv you make isn't python 3 (check w/ `python --version`), use `mkvirtualenv speakeasy -p /path/to/your/python3` (find your python3 path with `which python3`)
 
 ```bash
-mkvirtualenv rsf
+mkvirtualenv speakeasy
 ```
 
 Install requirements:
